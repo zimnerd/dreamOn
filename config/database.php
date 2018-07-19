@@ -44,7 +44,7 @@ return [
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'enyagano_dreamOn'),
-            'username' => env('DB_USERNAME', 'nyagano_eddy'),
+            'username' => env('DB_USERNAME', 'enyagano_eddy'),
             'password' => env('DB_PASSWORD', 'Eddy2020#'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
