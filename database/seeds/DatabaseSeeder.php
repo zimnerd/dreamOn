@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             DB::table('dreams')->insert([
                 'heading' => $faker->title,
                 'description' =>$faker->text,
-                'tags' => $faker->text,
-                'important_facts' => $faker->text,
+                'tags' => $faker->title,
+                'important_facts' => $faker->title,
             ]);
         }
 
