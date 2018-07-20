@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
                 'description' =>$faker->text,
                 'tags' => $faker->name,
                 'important_facts' => $faker->name,
+                'created_at' => $faker->date(),
+                'updated_at' => $faker->dateTime(),
             ]);
         }
 
