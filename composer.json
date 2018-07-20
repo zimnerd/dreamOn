@@ -51,6 +51,9 @@
         ]
     },
     "config": {
+      "platform": {
+      "php": "7.2"
+    },
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
