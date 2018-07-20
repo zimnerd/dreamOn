@@ -18,7 +18,7 @@ class CreateDreamsTable extends Migration
             $table->string('heading');
             $table->text('description');
             $table->string('tags');
-            $table->json('important_facts');
+            $table->string('important_facts');
             $table->timestamps();
         });
     }
