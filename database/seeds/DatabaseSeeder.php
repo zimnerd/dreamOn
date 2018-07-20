@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < $limit; $i++) {
             // $this->call(UsersTableSeeder::class);
             DB::table('dreams')->insert([
-                'heading' => $faker->title,
+                'heading' => $faker->name.'_'.$i,
                 'description' =>$faker->text,
-                'tags' => $faker->title,
-                'important_facts' => $faker->title,
+                'tags' => $faker->name,
+                'important_facts' => $faker->name,
             ]);
         }
 
