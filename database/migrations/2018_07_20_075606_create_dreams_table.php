@@ -15,6 +15,10 @@ class CreateDreamsTable extends Migration
     {
         Schema::create('dreams', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('heading');
+            $table->text('description');
+            $table->string('tags');
+            $table->json('important_facts');
             $table->timestamps();
         });
     }
