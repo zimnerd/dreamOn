@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\API;
+use App\Http\Controllers\Controller;
+use App\Dream;
 
 class DreamController extends Controller
 {
@@ -25,7 +25,7 @@ class DreamController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
     public function list(){
-        return response()->json(['success' => "hi"], $this->successStatus);
+        return response()->json(['success' => "hi"]);
 
     }
 
