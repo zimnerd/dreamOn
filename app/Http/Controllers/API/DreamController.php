@@ -24,4 +24,9 @@ class DreamController extends Controller
         $success['name'] = $dream->heading;
         return response()->json(['success' => $success], $this->successStatus);
     }
+    public function list(){
+        return response()->json(['success' => "hi"]);
+
+    }
+
 }
