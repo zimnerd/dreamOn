@@ -16,6 +16,7 @@ class CreateDreamsTable extends Migration
         Schema::create('dreams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('heading');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->text('description');
             $table->string('tags');
             $table->string('important_facts');
