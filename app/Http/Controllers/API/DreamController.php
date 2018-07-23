@@ -1,12 +1,9 @@
 <?php
 
+namespace App\Http\Controllers;
 
-namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Dream;
-use Illuminate\Support\Facades\Auth;
-use Validator;
+
 class DreamController extends Controller
 {
     //
@@ -28,7 +25,7 @@ class DreamController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
     public function list(){
-        return response()->json(['success' => "hi"]);
+        return response()->json(['success' => "hi"], $this->successStatus);
 
     }
 
