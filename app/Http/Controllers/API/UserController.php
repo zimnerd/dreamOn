@@ -83,6 +83,7 @@ class UserController extends Controller
      */
     public function user(Request $request)
     {
+        print_r($request);
         return response()->json($request->user());
     }
 }
