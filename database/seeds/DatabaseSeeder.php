@@ -13,13 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $limit = 33;
+        $limit = 5;
 
         for ($i = 0; $i < $limit; $i++) {
             // $this->call(UsersTableSeeder::class);
             DB::table('dreams')->insert([
                 'heading' => $faker->name.'_'.$i,
                 'description' =>$faker->text,
+                'user_id' =>'1',
                 'tags' => $faker->name,
                 'important_facts' => $faker->name,
                 'created_at' => $faker->date(),
