@@ -25,7 +25,9 @@ class DreamController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
     public function list(){
-        return response()->json(['success' => "hi"]);
+        $dreams = Dream::orderBy('created_at', 'asc')->get();
+        $success['data'] = $dreams;
+        return response()->json(['success' => $success],['status'=>200]);
 
     }
 
