@@ -8,6 +8,7 @@ use App\Dream;
 class DreamController extends Controller
 {
     //
+    public $successStatus = 200;
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -30,7 +31,7 @@ class DreamController extends Controller
     {
         $dreams = Dream::orderBy('created_at', 'asc')->get();
         $success['data'] = $dreams;
-        return response()->json(['success' => $success], ['status' => 200]);
+        return response()->json(['success' => $success],  $this-> successStatus);
 
     }
 
