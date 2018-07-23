@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Http\Controllers\Controller;
 use App\Dream;
 
@@ -24,10 +25,12 @@ class DreamController extends Controller
         $success['name'] = $dream->heading;
         return response()->json(['success' => $success], $this->successStatus);
     }
-    public function list(){
+
+    public function list()
+    {
         $dreams = Dream::orderBy('created_at', 'asc')->get();
         $success['data'] = $dreams;
-        return response()->json(['success' => $success],['status'=>200]);
+        return response()->json(['success' => $success], ['status' => 200]);
 
     }
 
