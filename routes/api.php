@@ -13,6 +13,7 @@ Route::post('login',[ 'as' => 'login', 'uses' =>  'API\UserController@login']);
 Route::post('register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('details', 'API\UserController@details');
+    Route::post('user', 'API\UserController@user');
     Route::post('dream/create', 'API\DreamController@create');
     Route::get('dream/list', 'API\DreamController@list');
     Route::get('dream/show/{id}', 'API\DreamController@list');
