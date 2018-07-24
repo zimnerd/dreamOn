@@ -15,9 +15,7 @@ class DreamController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'heading' => 'required',
-            'description' => 'required',
-            'tags' => 'required',
-            'important_facts' => 'required',
+            'description' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
