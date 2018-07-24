@@ -52,16 +52,6 @@ class DreamController extends Controller
     public function update($id, Request $request)
     {
         $dream = Dream::findOrFail($id);
-
-        $validator = Validator::make($request->all(), [
-            'heading' => 'required',
-            'description' => 'required',
-            'tags' => 'required',
-            'important_facts' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
-        }
         $input = $request->all();
         $input['user_id'] = $user =  Auth::id();
         $dream->fill($input)->save();
