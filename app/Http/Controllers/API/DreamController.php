@@ -22,6 +22,7 @@ class DreamController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
         }
+        $fillable = array('heading', 'description', 'important_facts', 'user_id');
         $input = $request->all();
         $input['user_id'] = $user =  Auth::id();
         $dream = Dream::create($input);
