@@ -55,8 +55,6 @@ class DreamController extends Controller
         $input = $request->all();
         $input['user_id'] = $user =  Auth::id();
         $dream->fill($input)->save();
-        $dream['req'] = $request;
-
         return response()->json(['data' => $dream],  $this-> successStatus);
     }
 
