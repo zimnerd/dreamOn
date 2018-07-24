@@ -25,8 +25,9 @@ class DreamController extends Controller
         $input = $request->all();
         $input['user_id'] = $user =  Auth::id();
         $dream = Dream::create($input);
-        $success['name'] = $dream;
-        return response()->json(['success' => $success], $this->successStatus);
+        $dream['id'] = Dream::create($input)->id;
+
+        return response()->json(['data' => $dream], $this->successStatus);
     }
 
     public function list()
