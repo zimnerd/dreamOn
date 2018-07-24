@@ -15,14 +15,14 @@ class CreateDreamsTable extends Migration
     {
         Schema::create('dreams', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('heading');
-            $table->unsignedInteger('user_id');
+            $table->string('heading')->default('Dream heading')->change();
+            $table->unsignedInteger('user_id')->default(1)->change();
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->text('description');
-            $table->string('tags');
-            $table->string('important_facts');
+            $table->text('description')->default('Dream description')->change();
+            $table->string('tags')->default(null)->change();
+            $table->string('important_facts')->default(null)->change();
             $table->timestamps();
         });
     }
