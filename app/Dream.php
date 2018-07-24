@@ -8,5 +8,5 @@ class Dream extends Model
 {
     //
 
-    protected $fillable = array('heading', 'description', 'important_facts','tags', 'user_id');
+    protected $fillable = array('heading','dream_date', 'description', 'important_facts','tags', 'user_id');
 }
