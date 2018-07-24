@@ -63,7 +63,7 @@ class DreamController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
         $input = $request->all();
-
+        $input['user_id'] = $user =  Auth::id();
         $dream->fill($input)->save();
 
         return response()->json(['data' => $dream],  $this-> successStatus);
