@@ -21,6 +21,7 @@ class CreateDreamsTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->text('description')->default(null);
+            $table->date('dream_date')->nullable();
             $table->string('tags')->default(null);
             $table->string('important_facts')->default(null);
             $table->timestamps();
