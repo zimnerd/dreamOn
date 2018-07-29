@@ -11,6 +11,7 @@ use Validator;
 class UserController extends Controller
 {
     public $successStatus = 200;
+    public $headers = array(['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Methods' => array('GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'), 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
 
     /**
      * login api
@@ -24,7 +25,7 @@ class UserController extends Controller
             $data['token'] = $user->createToken('MyApp')->accessToken;
             return response()->json(['data' => $data], $this->successStatus);
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401, ['Access-Control-Allow-Origin' => '*','Access-Control-Allow-Methods'=>array('GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'), 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
+            return response()->json(['error' => 'Unauthorised'], 401, $this->headers);
         }
     }
 
@@ -49,7 +50,7 @@ class UserController extends Controller
         $user = User::create($input);
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['name'] = $user->name;
-        return response()->json(['success' => $success], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
+        return response()->json(['success' => $success], $this->successStatus, $this->headers);
     }
 
     /**
@@ -60,8 +61,7 @@ class UserController extends Controller
     public function user()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
-    }
+        return response()->json(['success' => $user], $this->successStatus,$this->headers );}
 
     /**
      * Logout user (Revoke the token)
