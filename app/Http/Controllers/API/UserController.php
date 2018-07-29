@@ -24,7 +24,7 @@ class UserController extends Controller
             $data['token'] = $user->createToken('MyApp')->accessToken;
             return response()->json(['data' => $data], $this->successStatus);
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
+            return response()->json(['error' => 'Unauthorised'], 401, ['Access-Control-Allow-Origin' => '*','Access-Control-Allow-Methods'=>array('GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'), 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
         }
     }
 
