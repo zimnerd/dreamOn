@@ -24,7 +24,7 @@ class UserController extends Controller
             $data['token'] = $user->createToken('MyApp')->accessToken;
             return response()->json(['data' => $data], $this->successStatus);
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            return response()->json(['error' => 'Unauthorised'], 401, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
         }
     }
 
@@ -42,14 +42,14 @@ class UserController extends Controller
             'c_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 401, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
         }
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['name'] = $user->name;
-        return response()->json(['success' => $success], $this->successStatus);
+        return response()->json(['success' => $success], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
     }
 
     /**
@@ -60,7 +60,7 @@ class UserController extends Controller
     public function user()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
+        return response()->json(['success' => $user], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
     }
 
     /**
