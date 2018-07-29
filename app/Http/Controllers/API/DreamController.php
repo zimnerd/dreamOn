@@ -53,7 +53,7 @@ class DreamController extends Controller
         $input = $request->all();
         $input['user_id'] = $user =  Auth::id();
         $dream->fill($input)->save();
-        return response()->json(['data' => $dream],  $this-> successStatus);
+        return response()->json(['data' => $dream],  $this-> successStatus,['Access-Control-Allow-Origin'=> '*','Access-Control-Allow-Headers'=>'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
     }
 
 }
