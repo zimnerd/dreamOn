@@ -11,7 +11,7 @@ use Validator;
 class UserController extends Controller
 {
     public $successStatus = 200;
-    public $headers = array('Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Methods' => array('GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'), 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token');
+    public $headers = array('Access-Control-Allow-Origin' => '*,http://localhost:8000,localhost:8000', 'Access-Control-Allow-Methods' => array('GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'), 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token');
 
     /**
      * login api
