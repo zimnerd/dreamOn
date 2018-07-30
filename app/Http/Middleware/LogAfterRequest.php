@@ -1,3 +1,6 @@
+<?php
+namespace App\Http\Middleware;
+
 use Closure;
 use Illuminate\Contracts\Routing\TerminableMiddleware;
 use Illuminate\Support\Facades\Log;
