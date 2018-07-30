@@ -9,7 +9,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Expose-Headers: Content-Length, X-JSON");
 header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Origin, Content-Type, Content-Range, Authorisation, Access-Control-Allow-Methods,Access-Control-Allow-Headers, Accept, X-Requested-With,Content-Disposition, Content-Description, X-Auth-Token");
+header("Access-Control-Allow-Headers: Origin, Content-Type, Content-Range, Authorisation, Access-Control-Allow-Methods,Access-Control-Allow-Headers, Access-Control-Allow-Origin, Accept, X-Requested-With,Content-Disposition, Content-Description, X-Auth-Token");
 $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
 );
