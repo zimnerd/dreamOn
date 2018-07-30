@@ -23,6 +23,6 @@ protected $hidden = [
 'password', 'remember_token',
 ];
 public function dreams(){
-    return $this->hasMany('Dream');
+    return $this->hasMany('App\Dream');
 }
 }
