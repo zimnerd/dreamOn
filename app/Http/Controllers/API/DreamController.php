@@ -34,8 +34,8 @@ class DreamController extends Controller
     public function list()
     {
         $user = Auth::id();
-        //$dreams = Dream::orderBy('created_at', 'asc')->get();
-        $dreams = User::find($user)->dreams;
+        $dreams = Dream::where('user_id',$user)->orderBy('created_at', 'asc')->get();
+        //$dreams = User::findOrFail($user)->dreams;
         return response()->json(['data' => $dreams], $this->successStatus);
     }
 
