@@ -25,10 +25,10 @@ class UserController extends Controller
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
             $data['token'] = $user->createToken('MyApp')->accessToken;
-            return response()->json(['data' => $data], $this->successStatus, $this->headers);
+            return response()->json(['data' => $data], $this->successStatus);
         } else {
             Log::info('User failed to login.', ['id' => $request->all()]);
-            return response()->json(['error' => 'Unauthorised'], 401, $this->headers);
+            return response()->json(['error' => 'Unauthorised'], 401);
         }
     }
 
@@ -54,7 +54,7 @@ class UserController extends Controller
         $user = User::create($input);
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['name'] = $user->name;
-        return response()->json(['success' => $success], $this->successStatus, $this->headers);
+        return response()->json(['success' => $success], $this->successStatus);
     }
 
     /**
@@ -65,7 +65,7 @@ class UserController extends Controller
     public function user()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus,$this->headers );}
+        return response()->json(['success' => $user], $this->successStatus );}
 
     /**
      * Logout user (Revoke the token)
