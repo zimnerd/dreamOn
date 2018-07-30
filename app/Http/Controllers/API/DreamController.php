@@ -11,7 +11,6 @@ use Validator;
 
 class DreamController extends Controller
 {
-    //
     public $successStatus = 200;
 
     public function create(Request $request)
