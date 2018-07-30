@@ -11,7 +11,7 @@ use Validator;
 
 class DreamController extends Controller
 {
-    
+
     public $successStatus = 200;
 
     public function create(Request $request)
@@ -35,7 +35,7 @@ class DreamController extends Controller
     {
         $user = Auth::id();
         //$dreams = Dream::orderBy('created_at', 'asc')->get();
-        $dreams = User::find($user)->dreams::orderBy('created_at', 'asc')->get();
+        $dreams = User::find($user)->dreams;
         return response()->json(['data' => $dreams], $this->successStatus);
     }
 
