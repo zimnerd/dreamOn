@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -27,14 +28,15 @@ class DreamController extends Controller
         $dream = Dream::create($input);
         $dream['id'] = Dream::create($input)->id;
 
-        return response()->json(['data' => $dream], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
+        return response()->json(['data' => $dream], $this->successStatus);
     }
 
     public function list()
     {
-        $dreams = Dream::orderBy('created_at', 'asc')->get();
-        return response()->json(['data' => $dreams], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
-
+        $user = Auth::id();
+        //$dreams = Dream::orderBy('created_at', 'asc')->get();
+        $dreams = User::find($user)->dreams::orderBy('created_at', 'asc')->get();
+        return response()->json(['data' => $dreams], $this->successStatus);
     }
 
     public function edit($id)
@@ -46,7 +48,7 @@ class DreamController extends Controller
     {
         $dream = Dream::findOrFail($id);
         $dream['id'] = $id;
-        return response()->json(['data' => $dream], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
+        return response()->json(['data' => $dream], $this->successStatus);
     }
 
     public function update($id, Request $request)
@@ -55,7 +57,7 @@ class DreamController extends Controller
         $input = $request->all();
         $input['user_id'] = $user = Auth::id();
         $dream->fill($input)->save();
-        return response()->json(['data' => $dream], $this->successStatus, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
+        return response()->json(['data' => $dream], $this->successStatus);
     }
 
 }
