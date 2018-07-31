@@ -58,6 +58,8 @@ class DreamController extends Controller
         $dream = Dream::findOrFail($id);
         $input = $request->all();
         $input['user_id'] = $user = Auth::id();
+        $input['important_facts']=json_encode(explode(",", $request->important_facts));
+        $input['tags']=json_encode(explode(",", $request->tags));
         $dream->fill($input)->save();
         return response()->json(['data' => $dream], $this->successStatus);
     }
