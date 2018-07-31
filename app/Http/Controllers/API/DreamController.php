@@ -25,6 +25,8 @@ class DreamController extends Controller
         }
         $input = $request->all();
         $input['user_id'] = $user = Auth::id();
+        $input['important_facts']=json_encode(explode(",", $request->important_facts));
+        $input['tags']=json_encode(explode(",", $request->tags));
         $dream = Dream::create($input);
         $dream['id'] = Dream::create($input)->id;
 
