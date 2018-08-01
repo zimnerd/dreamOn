@@ -28,7 +28,6 @@ class DreamController extends Controller
         $input['important_facts']=json_encode(explode(",", $request->important_facts));
         $input['tags']=json_encode(explode(",", $request->tags));
         $dream = Dream::create($input);
-        $dream['id'] = Dream::create($input)->id;
 
         return response()->json(['data' => $dream], $this->successStatus);
     }
