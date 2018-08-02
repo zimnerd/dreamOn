@@ -44,7 +44,7 @@ class UserController extends Controller
             'c_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401, ['Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Headers' => 'Origin, Content-Type, Content-Range, Content-Disposition, Content-Description, X-Auth-Token']);
+            return response()->json(['error' => $validator->errors()], 401);
         }
         $input = $request->all();
         Log::info('User reg the user: '.$input);
