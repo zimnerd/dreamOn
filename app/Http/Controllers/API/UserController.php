@@ -60,7 +60,10 @@ class UserController extends Controller
     public function user()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus );}
+        $data['token'] = $user->createToken('MyApp')->accessToken;
+        $data['user'] = $user;
+        return response()->json(['data' => $data], $this->successStatus);
+    }
 
     /**
      * Logout user (Revoke the token)
