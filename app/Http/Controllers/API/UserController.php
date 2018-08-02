@@ -46,7 +46,6 @@ class UserController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
         $input = $request->all();
-        Log::info('User reg the user: '.$input);
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] = $user->createToken('MyApp')->accessToken;
