@@ -17,7 +17,7 @@ class CreateQuotesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->text('quote')->default(null);
-            $table->date('author')->nullable();
+            $table->string('author')->nullable();
         });
     }
 
