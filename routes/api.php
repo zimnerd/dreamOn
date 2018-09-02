@@ -18,4 +18,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('dream/list', 'API\DreamController@list');
     Route::get('dream/show/{id}', 'API\DreamController@show');
     Route::post('dream/update/{id}', 'API\DreamController@update');
+    Route::post('dream/delete/{id}', 'API\DreamController@delete');
+    Route::post('quote/create', 'API\QuoteController@create');
+    Route::get('quote/show/{id}', 'API\QuoteController@show');
 });

@@ -51,6 +51,12 @@ class DreamController extends Controller
         $dream['id'] = $id;
         return response()->json(['data' => $dream], $this->successStatus);
     }
+    public function delete($id)
+    {
+        $dream = Dream::findOrFail($id);
+        $dream->delete();
+        return response()->json(['message' => 'Dream entry deleted successfully'], $this->successStatus);
+    }
 
     public function update($id, Request $request)
     {

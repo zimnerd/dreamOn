@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Quote;
+use Validator;
 
 class QuoteController extends Controller
 {
+    public $successStatus = 200;
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +25,18 @@ class QuoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'quote' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+        $input = $request->all();
+        Quote::create($input);
+
+        return response()->json(['message' => 'Quote added'], $this->successStatus);
     }
 
     /**
@@ -45,7 +58,9 @@ class QuoteController extends Controller
      */
     public function show($id)
     {
-        //
+        $quote = Quote::findOrFail($id);
+        $quote['id'] = $id;
+        return response()->json(['data' => $quote], $this->successStatus);
     }
 
     /**
