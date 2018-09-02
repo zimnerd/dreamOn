@@ -97,4 +97,11 @@ class QuoteController extends Controller
     {
         //
     }
+
+
+    public function list()
+    {
+        $quotes = Quote::get();
+        return response()->json(['data' => $quotes], $this->successStatus);
+    }
 }
