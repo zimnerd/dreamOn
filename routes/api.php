@@ -21,5 +21,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('dream/delete/{id}', 'API\DreamController@delete');
     Route::post('quote/create', 'API\QuoteController@create');
     Route::get('quote/show/{id}', 'API\QuoteController@show');
+    Route::get('quote/randquote', 'API\QuoteController@randquote');
     Route::get('quote/list', 'API\QuoteController@list');
 });

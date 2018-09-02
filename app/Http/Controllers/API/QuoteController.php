@@ -46,9 +46,11 @@ class QuoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function randquote()
     {
         //
+        $quote = Quote::inRandomOrder()->first();
+        return response()->json(['data' => $quote], $this->successStatus);
     }
 
     /**
