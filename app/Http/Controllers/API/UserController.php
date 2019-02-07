@@ -51,6 +51,47 @@ class UserController extends Controller
         $success['token'] = $user->createToken('MyApp')->accessToken;
         return response()->json(['success' => $success], $this->successStatus);
     }
+    /**
+     * Forgot api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function forgot(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['token'] = $user->createToken('MyApp')->accessToken;
+        return response()->json(['success' => $success], $this->successStatus);
+    }
+    /**
+     * Reset api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reset(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['token'] = $user->createToken('MyApp')->accessToken;
+        return response()->json(['success' => $success], $this->successStatus);
+    }
 
     /**
      * details api
