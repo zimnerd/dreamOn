@@ -11,9 +11,9 @@
 */
 Route::post('login', ['as' => 'login', 'uses' => 'API\UserController@login']);
 Route::post('forgot', 'API\UserController@forgot');
-Route::post('reset', 'API\UserController@reset');
-Route::post('create', 'PasswordResetController@create');
-Route::get('find/{token}', 'PasswordResetController@find');
+//Route::post('reset', 'API\UserController@reset');
+//Route::post('create', 'PasswordResetController@create');
+//Route::get('find/{token}', 'PasswordResetController@find');
 Route::post('reset', 'PasswordResetController@reset');
 Route::post('register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function () {
@@ -28,4 +28,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('quote/show/{id}', 'API\QuoteController@show');
     Route::get('quote/randquote', 'API\QuoteController@randquote');
     Route::get('quote/list', 'API\QuoteController@list');
+});
+Route::group([
+    'namespace' => 'Auth',
+    'middleware' => 'api',
+    'prefix' => 'password'
+], function () {
+    Route::post('create', 'PasswordResetController@create');
+    Route::get('find/{token}', 'PasswordResetController@find');
+    Route::post('reset', 'PasswordResetController@reset');
 });
