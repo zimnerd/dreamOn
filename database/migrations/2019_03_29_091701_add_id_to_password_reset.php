@@ -15,6 +15,8 @@ class AddIdToPasswordReset extends Migration
     {
         Schema::table('password_resets', function (Blueprint $table) {
             //
+
+            $table->increments('id')->primary();
         });
     }
 
@@ -27,6 +29,7 @@ class AddIdToPasswordReset extends Migration
     {
         Schema::table('password_resets', function (Blueprint $table) {
             //
+            $table->dropColumn('id');
         });
     }
 }
