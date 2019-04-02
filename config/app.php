@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'DREAM ON'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://enyagano.co.za/dreamOn'),
+    'url' => env('APP_URL', 'http://api.enyagano.co.za'),
 
     /*
     |--------------------------------------------------------------------------
