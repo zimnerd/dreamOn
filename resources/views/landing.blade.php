@@ -68,6 +68,7 @@
         <div class="flex-center position-ref full-height">
                 <div class="top-right links">
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/landing') }}">Welcome</a>
 
                 </div>
 

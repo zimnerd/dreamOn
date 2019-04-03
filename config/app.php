@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://api.enyagano.co.za'),
 
+    'IMG_PATH'=>"https://dreamon.test/storage/img/",
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
