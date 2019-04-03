@@ -11,9 +11,6 @@
 */
 Route::post('login', ['as' => 'login', 'uses' => 'API\UserController@login']);
 Route::post('forgot', 'API\UserController@forgot');
-//Route::post('reset', 'API\UserController@reset');
-//Route::post('create', 'PasswordResetController@create');
-//Route::get('find/{token}', 'PasswordResetController@find');
 Route::post('reset', 'PasswordResetController@reset');
 Route::post('register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function () {

@@ -88,7 +88,6 @@ class ProfileController extends Controller
         //
         $user = Auth::id();
         $profile = Profile::where('user_id',$user)->orderBy('id', 'asc')->get();
-        //$dreams = User::findOrFail($user)->dreams;
         return response()->json(['data' => $profile], $this->successStatus);
     }
 
