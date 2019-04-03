@@ -20,6 +20,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('user', 'API\UserController@user');
     Route::post('logout', 'API\UserController@logout');
     Route::post('dream/create', 'API\DreamController@create');
+    Route::post('comment/create', 'API\CommentController@create');
+    Route::post('comment/like', 'API\LikeController@commentlike');
+    Route::post('reply/create', 'API\CommentController@createReply');
+    Route::post('dream/like', 'API\LikeController@dreamlike');
+    Route::post('dream/read', 'API\ReadController@create');
+    Route::post('profile/create', 'API\ProfileController@create');
+    Route::post('profile/update/{id}', 'API\ProfileController@update');
     Route::get('dream/list', 'API\DreamController@list');
     Route::get('dream/show/{id}', 'API\DreamController@show');
     Route::post('dream/update/{id}', 'API\DreamController@update');

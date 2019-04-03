@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIdToPasswordReset extends Migration
+class CreateReadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class AddIdToPasswordReset extends Migration
      */
     public function up()
     {
-        Schema::table('password_resets', function (Blueprint $table) {
-            //
-
-            $table->increments('id')->primary();
+        Schema::create('reads', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('dream_id')->unsigned();
+            $table->timestamps();
         });
     }
 
@@ -27,9 +28,6 @@ class AddIdToPasswordReset extends Migration
      */
     public function down()
     {
-        Schema::table('password_resets', function (Blueprint $table) {
-            //
-            $table->dropColumn('id');
-        });
+        Schema::dropIfExists('reads');
     }
 }
