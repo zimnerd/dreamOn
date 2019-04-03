@@ -83,9 +83,13 @@ class ProfileController extends Controller
      * @param  \App\Profile $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function list(Profile $profile)
     {
         //
+        $user = Auth::id();
+        $profile = Profile::where('user_id',$user)->orderBy('id', 'asc')->get();
+        //$dreams = User::findOrFail($user)->dreams;
+        return response()->json(['data' => $profile], $this->successStatus);
     }
 
     /**

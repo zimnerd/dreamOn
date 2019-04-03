@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('dream/like', 'API\LikeController@dreamlike');
     Route::post('dream/read', 'API\ReadController@create');
     Route::post('profile/create', 'API\ProfileController@create');
+    Route::get('profile/list', 'API\ProfileController@list');
     Route::post('profile/update/{id}', 'API\ProfileController@update');
     Route::get('dream/list', 'API\DreamController@list');
     Route::get('dream_category/list', 'API\DreamCategoryController@list');
