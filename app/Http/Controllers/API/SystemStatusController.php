@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers\API;
 
-use App\DreamCategory;
+use App\SystemStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Dream;
 use Validator;
 
-class DreamCategoryController extends Controller
+class SystemStatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public $successStatus = 200;
     public function list()
     {
         //
-        $categories = DreamCategory::orderBy('category_name', 'asc')->get();
+        $status = SystemStatus::orderBy('status_name', 'asc')->get();
         //$dreams = User::findOrFail($user)->dreams;
-        return response()->json(['data' => $categories], $this->successStatus);
+        return response()->json(['data' => $status], $this->successStatus);
+    }
+
+    public function listbyarea($area)
+    {
+        //
+        $status = SystemStatus::where('status_area',$area)->orderBy('status_name', 'asc')->get();
+        //$dreams = User::findOrFail($user)->dreams;
+        return response()->json(['data' => $status], $this->successStatus);
     }
 
     /**
@@ -50,10 +51,10 @@ class DreamCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\DreamCategory  $dreamCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(DreamCategory $dreamCategory)
+    public function show($id)
     {
         //
     }
@@ -61,10 +62,10 @@ class DreamCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\DreamCategory  $dreamCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(DreamCategory $dreamCategory)
+    public function edit($id)
     {
         //
     }
@@ -73,10 +74,10 @@ class DreamCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\DreamCategory  $dreamCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DreamCategory $dreamCategory)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -84,10 +85,10 @@ class DreamCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\DreamCategory  $dreamCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DreamCategory $dreamCategory)
+    public function destroy($id)
     {
         //
     }

@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile/create', 'API\ProfileController@create');
     Route::post('profile/update/{id}', 'API\ProfileController@update');
     Route::get('dream/list', 'API\DreamController@list');
+    Route::get('dream_category/list', 'API\DreamCategoryController@list');
+    Route::get('system_status/listbyarea/{area}', 'API\SystemStatusController@listbyarea');
+    Route::get('system_status/list', 'API\SystemStatusController@list');
     Route::get('dream/show/{id}', 'API\DreamController@show');
     Route::post('dream/update/{id}', 'API\DreamController@update');
     Route::post('dream/delete/{id}', 'API\DreamController@delete');
