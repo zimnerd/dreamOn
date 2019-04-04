@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Image;
 use Validator;
 
 class ProfileController extends Controller
@@ -59,12 +60,12 @@ class ProfileController extends Controller
             $profile->bio = $request->get('bio');
             $profile->cover_photo_path = $request->get('cover_photo_path');
             $profile->profile_photo_path = $request->get('profile_photo_path');
-            if(!empty($request->get('profile_photo_path'))){
-                $profile->profile_photo_path = $this->createImageFromBase64($request->get('profile_photo_path'),"profile")  ;
+            if (!empty($request->get('profile_photo_path'))) {
+                $profile->profile_photo_path = $this->createImageFromBase64($request->get('profile_photo_path'), "profile");
             }
-            if(!empty($request->get('cover_photo_path'))){
+            if (!empty($request->get('cover_photo_path'))) {
 
-                $profile->cover_photo_path = $this->createImageFromBase64($request->get('cover_photo_path'),"cover")  ;
+                $profile->cover_photo_path = $this->createImageFromBase64($request->get('cover_photo_path'), "cover");
             }
             $profile->user()->associate($request->user());
             $user = User::find(Auth::id());
@@ -95,22 +96,35 @@ class ProfileController extends Controller
     {
         //
         $user = Auth::id();
-        $profile = Profile::where('user_id',$user)->orderBy('id', 'asc')->get();
+        $profile = Profile::where('user_id', $user)->orderBy('id', 'asc')->get();
         $profile[0]['image_path'] = env('IMG_PATH');
         return response()->json(['data' => $profile], $this->successStatus);
     }
 
-    public function createImageFromBase64($file_data,$area="image"){
-        $file_name = $area.'_'.time().'.png'; //generating unique file name;
+    public function createImageFromBase64($file_data, $area = "image")
+    {
+        $file_name = $area . '_' . time() . '.png'; //generating unique file name;
         @list($type, $file_data) = explode(';', $file_data);
         @list(, $file_data) = explode(',', $file_data);
-        if($file_data!=""){ // storing image in storage/app/public Folder
+        if ($file_data != "") { // storing image in storage/app/public Folder
 
-            Storage::disk("local")->put($file_name,base64_decode($file_data));
-        }
-        else{
+            Storage::disk("local")->put($file_name, base64_decode($file_data));
+        } else {
             return false;
         }
+        $path = Storage::disk('public')->path($file_name);
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        $thumbnailpath = $storagePath . $file_name;
+
+        if (preg_match("/cover/i", $area)) {
+            $img = Image::make($thumbnailpath)->fit(600, 200);
+        } elseif (preg_match("/profile/i", $area)) {
+            $img = Image::make($thumbnailpath)->fit(200);
+        } else {
+
+            $img = Image::make($thumbnailpath);
+        }
+        $img->save($thumbnailpath);
 
         return substr(strrchr($file_name, "/"), 1);
     }
@@ -134,28 +148,38 @@ class ProfileController extends Controller
      * @param  \App\Profile $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile,$id)
+    public function update(Request $request, Profile $profile, $id)
     {
         //
-
-        Log::info('Loging the user profile: ' . $request);
-        Log::info('Loging the user profile: ' . $profile);
-
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $profile = Profile::findOrFail($id);
         $input = $request->all();
-        $input['hobbies']=json_encode(explode(",", $request->get('hobbies')));
-        $input['interests']= json_encode(explode(",", $request->get('interests')));
-        if(!empty($request->get('profile_photo_path'))){
-            Log::info('Has profile photo: ' . $request->get('profile_photo_path'));
-            $input['profile_photo_path'] = $this->createImageFromBase64($request->get('profile_photo_path'),"public/img/profile","profile")  ;
-        }
-        if(!empty($request->get('cover_photo_path'))){
+        $input['hobbies'] = json_encode(explode(",", $request->get('hobbies')));
+        $input['interests'] = json_encode(explode(",", $request->get('interests')));
+        if (!empty($request->get('profile_photo_path'))) {
+            $img = $storagePath . "public/img/" . $profile->profile_photo_path;
+            if (file_exists($img)) {
+                unlink($img);
+            } else {
+                Log::info('file not found: ' . $img);
+            }
 
-            Log::info('Has cover photo: ' . $request->get('cover_photo_path'));
-            $input['cover_photo_path'] = $this->createImageFromBase64($request->get('cover_photo_path'),"public/img/cover","cover")  ;
+            $input['profile_photo_path'] = $this->createImageFromBase64($request->get('profile_photo_path'), "public/img/profile", "profile");
+
+        }
+        if (!empty($request->get('cover_photo_path'))) {
+            $img = $storagePath . "public/img/" . $profile->cover_photo_path;
+            if (file_exists($img)) {
+                unlink($img);
+            } else {
+                Log::info('file not found: ' . $img);
+            }
+
+            $input['cover_photo_path'] = $this->createImageFromBase64($request->get('cover_photo_path'), "public/img/cover", "cover");
+
         }
         $profile->fill($input)->save();
-      return response()->json(['data' => $profile], $this->successStatus);
+        return response()->json(['data' => $profile], $this->successStatus);
 
 
     }
