@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Comment;
+use App\Like;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,6 +51,9 @@ class DreamController extends Controller
     {
         $dream = Dream::findOrFail($id);
         $dream['id'] = $id;
+
+        $dream['likes'] = Like::where('dream_id',$id)->get();
+        $dream['comments'] = Comment::where('dream_id',$id)->get();;
         return response()->json(['data' => $dream], $this->successStatus);
     }
     public function delete($id)

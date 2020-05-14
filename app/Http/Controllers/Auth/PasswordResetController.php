@@ -2,23 +2,19 @@
 /**
  * Created by IntelliJ IDEA.
  * User: eddy
- * Date: 2019/02/07
- * Time: 16:03
+ * Date: 2019/03/29
+ * Time: 08:33
  */
 
+namespace App\Http\Controllers\Auth;
 
-namespace App\Http\Controllers\API;
-
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Support\Facades\Auth;
-use Validator;
-use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 use App\Notifications\PasswordResetRequest;
 use App\Notifications\PasswordResetSuccess;
 use App\PasswordReset;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class PasswordResetController extends Controller
 {
@@ -42,17 +38,18 @@ class PasswordResetController extends Controller
             ['email' => $user->email],
             [
                 'email' => $user->email,
-                'token' => str_random(60)
-             ]
+                'token' => str_random(6)
+            ]
         );
         if ($user && $passwordReset)
             $user->notify(
                 new PasswordResetRequest($passwordReset->token)
             );
         return response()->json([
-            'message' => 'We have e-mailed your password reset link!'
+            'message' => 'We have e-mailed your password reset code!'
         ]);
     }
+
     /**
      * Find token password reset
      *
@@ -76,7 +73,8 @@ class PasswordResetController extends Controller
         }
         return response()->json($passwordReset);
     }
-     /**
+
+    /**
      * Reset password
      *
      * @param  [string] email
@@ -112,5 +110,4 @@ class PasswordResetController extends Controller
         $user->notify(new PasswordResetSuccess($passwordReset));
         return response()->json($user);
     }
-
 }

@@ -4,14 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Quote extends Model
+class DreamCategory extends Model
 {
     //
-    protected $fillable = array('quote','author');
-
+    public function dreams()
+    {
+        return $this->hasMany('App\Dream');
+    }
     public function status()
     {
         return $this->hasOne('App\SystemStatus');
     }
-
 }
