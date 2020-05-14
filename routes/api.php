@@ -9,6 +9,9 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/', function () {
+   return response()->json(['status' => 'ok'], 200);
+});
 Route::post('login', ['as' => 'login', 'uses' => 'API\UserController@login']);
 Route::post('forgot', 'API\UserController@forgot');
 Route::post('reset', 'PasswordResetController@reset');
